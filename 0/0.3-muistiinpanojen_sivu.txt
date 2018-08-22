@@ -1,0 +1,16 @@
+# www.websequencediagrams.com 
+
+    käyttäjä->selain:
+    note left of selain
+    kayttaja kirjottaa osoiteriville
+    fullstack-exampleapp.herokuapp.com/notes
+    end note
+    selain->palvelin: GET fullstack-exampleapp.herokuapp.com/notes
+    note left of palvelin
+      muodostetaan HTML-sivu jossa ovat muistiinpanot
+    end note
+    palvelin->selain: status 200, sivun HTML-koodi
+    
+    note left of selain
+     selain näyttää palvelimen palauttaman HTML:n
+    end note
