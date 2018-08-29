@@ -24,11 +24,10 @@
     end note
     selain->palvelin: GET main.js
     palvelin->selain: status 200, main.js
-    selain->palvelin: GET data.json
-    palvelin->selain: status 200, data.json
-    selain->palvelin: GET minerkill.js
-    palvelin->selain: status 200, minerkill.js
     note left of selain
         selain näyttää palvelimen palauttaman HTML:n 
-        kuvineen ja suorittaa javascript-koodin
+        kuvineen ja suorittaa javascript-koodin.
+        javascript pyytää data.json -tiedoston
     end note
+    selain->palvelin: GET data.json
+    palvelin->selain: status 200, data.json
