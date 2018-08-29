@@ -1,0 +1,27 @@
+# www.websequencediagrams.com 
+
+    käyttäjä->selain:
+    note left of selain
+        käyttäjä valitsee osoitteen
+    end note
+    selain->palvelin: GET https://fullstack-exampleapp.herokuapp.com/spa
+    note left of palvelin
+        muodostetaan HTML sivusta
+    end note
+    palvelin->selain: status 200, palautetaan sivun HTML
+    note left of selain
+        selain parsii palvelimen palauttaman HTML:n, 
+        pyytää palvelimelta muut tarvittavat tiedostot 
+        ja mahdollisesti alkaa jo renderöimään sivua
+    end note
+    selain->palvelin: GET main.css
+    palvelin->selain: status 200, main.css
+    selain->palvelin: GET spa.js
+    palvelin->selain: status 200, spa.js
+    note left of selain
+        selain näyttää palvelimen palauttaman HTML:n 
+        ja suorittaa javascript-koodin.
+        javascript pyytää data.json -tiedoston
+    end note
+    selain->palvelin: GET data.json
+    palvelin->selain: status 200, data.json
