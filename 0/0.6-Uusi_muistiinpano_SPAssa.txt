@@ -1,0 +1,21 @@
+# www.websequencediagrams.com 
+
+    käyttäjä->selain:
+    note left of selain
+        käyttäjä kirjoittaa tekstiä tekstikenttään
+    end note
+    note left of selain
+        käyttäjä painaa Talleta-painiketta
+    end note
+    selain->palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+    note right of selain
+        POST:n mukana lähetetään json-tyyppistä dataa
+        joka sisältää käyttäjän viestin ja lähetysajan.
+        Javascript piirtää muistiinpanot uudelleen,
+        käyttäjän viesti mukaan lisättynä
+    end note
+    palvelin->selain: status 201, created
+    note right of selain
+        palvelin palauttaa statuksen json-muodossa
+        {"message":"note created"}
+    end note
