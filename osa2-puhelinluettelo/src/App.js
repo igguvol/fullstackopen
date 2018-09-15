@@ -21,7 +21,7 @@ class App extends React.Component {
 
   componentDidMount() 
   {
-    phonebookService.getAll('http://localhost:3001/persons')
+    phonebookService.getAll()
       .then( response => this.setState( {persons:response.data} ) );
   }
 
