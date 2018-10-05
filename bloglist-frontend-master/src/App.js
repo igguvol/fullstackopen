@@ -21,7 +21,7 @@ class App extends React.Component {
   componentDidMount() {
     blogService.getAll().then(blogs =>
       {
-        const b = blogs.sort( (a,b) => b.likes - a.likes );
+        blogs.sort( (a,b) => b.likes - a.likes );
         this.setState({ blogs })
       }
     )
@@ -129,7 +129,7 @@ class App extends React.Component {
       if ( reply.status === 200 || reply.response.status === 200 )
       {
         this.showNotification( 'Blog entry deleted', 'success' );
-        const b = this.state.blogs.filter( (a) => a.id != id );
+        const b = this.state.blogs.filter( (a) => a.id !== id );
         this.setState( {blogs:b} );
       }
       else
