@@ -24,24 +24,33 @@ class BlogForm extends Component
   
   render() 
   {
+    const hideWhenVisible = { display: this.state.visible ? 'none' : '' }
+    const showWhenVisible = { display: this.state.visible ? '' : 'none' }
+
     return (
       <div>
-        <h3>Create new</h3>
-        <form name="blogForm" onSubmit={(e) => this.submit(e,this.state) }>
-          <div key='title'>
-            title:
-            <input name="title" value={this.state['title']} onChange={this.change} />
-          </div>
-          <div key='author'>
-            author:
-            <input name="author" value={this.state['author']} onChange={this.change} />
-          </div>
-          <div key='url'>
-            url:
-            <input name="url" value={this.state['url']} onChange={this.change} />
-          </div>
-          <input type="submit" value="Submit" />
-        </form>
+        <div style={hideWhenVisible}>
+          <button onClick={ e => this.setState({ visible: true })}>Create new</button>
+        </div>
+        <div style={showWhenVisible}>
+          <h3>Create new</h3>
+          <form name="blogForm" onSubmit={(e) => this.submit(e,this.state) }>
+            <div key='title'>
+              title:
+              <input name="title" value={this.state['title']} onChange={this.change} />
+            </div>
+            <div key='author'>
+              author:
+              <input name="author" value={this.state['author']} onChange={this.change} />
+            </div>
+            <div key='url'>
+              url:
+              <input name="url" value={this.state['url']} onChange={this.change} />
+            </div>
+            <input type="submit" value="Submit" />
+          </form>
+          <button onClick={ e => this.setState({ visible: false })}>Cancel</button>
+        </div>
       </div>
     );
   }
