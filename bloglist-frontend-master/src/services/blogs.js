@@ -22,4 +22,10 @@ const post = (values) => {
     .catch( (a) => a );
 }
 
-export default { setToken, getAll, post }
+const update = (id,values) => {
+  return axios.put( baseUrl + '/' + id, JSON.stringify(values), config)
+  .then( (a) => a )
+  .catch( (a) => a );
+}
+
+export default { setToken, getAll, post, update }
