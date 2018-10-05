@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class BlogForm extends Component 
 {
@@ -6,6 +7,11 @@ class BlogForm extends Component
     super(props);
     this.state = {title:'', author:'', url:''};
   }
+
+  static propTypes = {
+    submit: PropTypes.func.isRequired
+  }
+  
 
   change = (event) => {
     var n = {};
@@ -55,5 +61,6 @@ class BlogForm extends Component
     );
   }
 }
+
 
 export default BlogForm;
