@@ -8,6 +8,11 @@ class Blog extends React.Component
     this.state = {visible:false};
   }
 
+  switchVisibility = (e) => {
+    e.preventDefault();
+    this.setState( {'visible':!this.state.visible});
+  }
+
   render()
   {
     const showWhenVisible = { display: this.state.visible ? '' : 'none' }
@@ -15,10 +20,10 @@ class Blog extends React.Component
     const blog = this.props.blog;
     return (
       <div>
-        <div className='blogStyle' key="name" onClick={(e)=>{e.preventDefault();this.setState( {'visible':!this.state.visible});} }>
+        <div className='blogStyle' id="name" key="name" onClick={(e)=>{this.switchVisibility(e)} }>
           <span>{blog.title} {blog.author}</span>
         </div>
-        <div key="info" style={showWhenVisible} className='blogStyle' >
+        <div id="info" key="info" style={showWhenVisible} className='blogStyle' >
           <div>
             <b>{blog.title}</b> by <b>{blog.author}</b>
           </div>
