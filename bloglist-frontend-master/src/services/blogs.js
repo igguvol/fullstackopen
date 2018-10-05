@@ -16,16 +16,23 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-const post = (values) => {
+const postBlog = (values) => {
   return axios.post(baseUrl, JSON.stringify(values), config)
     .then( (a) => a )
     .catch( (a) => a );
 }
 
-const update = (id,values) => {
+const updateBlog = (id,values) => {
   return axios.put( baseUrl + '/' + id, JSON.stringify(values), config)
-  .then( (a) => a )
-  .catch( (a) => a );
+    .then( (a) => a )
+    .catch( (a) => a );
 }
 
-export default { setToken, getAll, post, update }
+const deleteBlog = (id) => {
+  console.log('deleteBlog',config);
+  return axios.delete( `${baseUrl}/${id}`, config )
+    .then( (a) => a )
+    .catch( (a) => a );
+}
+
+export default { setToken, getAll, postBlog, updateBlog, deleteBlog }

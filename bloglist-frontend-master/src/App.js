@@ -52,7 +52,7 @@ class App extends React.Component {
   storeLogin( data )
   {
     window.localStorage.setItem( 'login', JSON.stringify(data) );
-    this.setState( {username: data.username, 'token': data.token} );
+    this.setState( {username:data.username, 'token':data.token} );
     blogService.setToken( data.token );
   }
 
@@ -89,11 +89,10 @@ class App extends React.Component {
     this.setState(n);
   }
 
-  submit = async (state) => {
+  submitBlog = async (state) => {
     try
     {
-      const reply = await blogService.post( state );
-      console.log('________ reply:',reply)
+      const reply = await blogService.postBlog( state );
       if ( reply.status === 201 || reply.response.status === 201 )
       {
         this.showNotification( 'Blog "' + reply.data.title + '" added succesfully', 'success' );
@@ -115,11 +114,27 @@ class App extends React.Component {
 
   likeBlog = async (id, values) => 
   {
-    const reply = await blogService.update( id, values )
+    const reply = await blogService.updateBlog( id, values )
     if ( reply.status === 200 || reply.response.status === 200 )
       this.showNotification( 'Liked', 'success' );
     else
       this.showNotification( 'Something went wrong', 'error' );
+  }
+
+  deleteBlog = async (id) => 
+  {
+    if ( window.confirm( 'delete blog?' ) === true )
+    {
+      const reply = await blogService.deleteBlog( id );
+      if ( reply.status === 200 || reply.response.status === 200 )
+      {
+        this.showNotification( 'Blog entry deleted', 'success' );
+        const b = this.state.blogs.filter( (a) => a.id != id );
+        this.setState( {blogs:b} );
+      }
+      else
+        this.showNotification( reply.response.statusText, 'error' );
+    }
   }
 
   render() {
@@ -133,10 +148,14 @@ class App extends React.Component {
           <h4 >{this.state.username} logged in &nbsp;
             <button key='logout' onClick={this.logout}> Logout </button>
           </h4>
-          <BlogForm submit={this.submit}/>
+          <BlogForm submit={this.submitBlog}/>
           <br />
           {this.state.blogs.map(blog => 
-            <Blog likeBlog={this.likeBlog} key={blog.id} blog={blog}/>
+            <Blog key={blog.id} blog={blog}
+              username={this.state.username}
+              likeBlog={this.likeBlog} 
+              deleteBlog={this.deleteBlog}
+            />
           )}
         </div>
       )

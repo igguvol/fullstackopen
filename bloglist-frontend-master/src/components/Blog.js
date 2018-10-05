@@ -28,10 +28,19 @@ class Blog extends React.Component
           <div>
             &nbsp;<a href={blog.url}> {blog.url} </a>
           </div>
-          <div>
-            Added by {blog.user.name}
+          { blog.user && 
+            <div>
+              Added by {blog.user.name}
+            </div>
+          }
+          { (!blog.user || blog.user.username===this.props.username) &&
+            <div>
+              <button onClick={(e) => this.props.deleteBlog(blog.id)}>
+                delete
+              </button>
+            </div>
+          }
           </div>
-        </div>
         <br />  
       </div>
     );
