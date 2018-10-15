@@ -2,6 +2,9 @@ import React from 'react'
 
 const Login = (state, change) => (
   <div>
+    <div>
+      Login
+    </div>
     <div key='username'>
       <span>Username:</span>
       <input name="username" value={state['username']} onChange={change} />
