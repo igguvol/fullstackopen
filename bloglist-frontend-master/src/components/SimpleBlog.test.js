@@ -2,8 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import SimpleBlog from './SimpleBlog'
 
+const mockHandler = jest.fn()
+
 describe.only('<SimpleBlog />', () => {
-  it('renders blogStyle', () => {
+  it('SimpleBlog tests (5.12, 5.13)', () => {
     const blog = {
       title: 'TestBlog of the Month',
       author: 'R.D. Writer',
@@ -11,14 +13,15 @@ describe.only('<SimpleBlog />', () => {
       url: 'http://domain.com'
     }
 
-    var click = 0;
-    const blogComponent = shallow( <SimpleBlog blog={blog} onClick={(e)=>click++}/> )
-    const contentDiv = blogComponent.find('.title')
+    const blogComponent = shallow( <SimpleBlog blog={blog} onClick={mockHandler}/> )
     const nameDiv = blogComponent.find('button');
     nameDiv.simulate('click');
     nameDiv.simulate('click');
 
-    expect( click ).toBe( 2 ); 
+    expect(mockHandler.mock.calls.length).toBe(2)
     expect(blogComponent.text()).toContain(blog.title)
   })
+
+
+
 })
