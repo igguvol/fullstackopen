@@ -33,29 +33,31 @@ describe('<Blog />', () => {
 
   let blogComponent
 
-  beforeEach(() => {
-    blogComponent = shallow(<Blog blog={blog} username='test' deleteBlog={dummyFunc} likeBlog={dummyFunc}/>)
-  });
 
+  describe( 'visibility tests', () => {
+    beforeEach(() => {
+      blogComponent = shallow(<Blog blog={blog} username='test' deleteBlog={dummyFunc} likeBlog={dummyFunc}/>)
+    });
 
-  it('at start the children are not displayed', () => {
-    const div = blogComponent.find('#info')
-    expect(div.getElement().props.style).toEqual({ display: 'none' })
+    it('at start the children are not displayed', () => {
+      const div = blogComponent.find('#info')
+      expect(div.getElement().props.style).toEqual({ display: 'none' })
+    })
+
+    it('blog name is displayed', () => {
+      const nameDiv = blogComponent.find('#name');
+      expect(nameDiv.text()).toContain(blog.title)
+    })
+
+    it('blog url is shown after click', () => {
+      const nameDiv = blogComponent.find('#name');
+      nameDiv.simulate('click',  { preventDefault() {} });
+      const infoDiv = blogComponent.find('#info') 
+      expect(infoDiv.getElement().props.style).toEqual({display:''})
+      expect(infoDiv.text()).toContain(blog.url)
+    })
   })
 
-  it('blog name is displayed', () => {
-    const nameDiv = blogComponent.find('#name');
-    expect(nameDiv.text()).toContain(blog.title)
-  })
-
-  it('blog url is shown after click', () => {
-    const nameDiv = blogComponent.find('#name');
-    nameDiv.simulate('click',  { preventDefault() {} });
-    const infoDiv = blogComponent.find('#info') 
-    expect(infoDiv.getElement().props.style).toEqual({display:''})
-    expect(infoDiv.text()).toContain(blog.url)
-  })
-  
 
 })
 

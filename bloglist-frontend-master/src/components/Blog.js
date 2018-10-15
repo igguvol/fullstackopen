@@ -28,7 +28,7 @@ class Blog extends React.Component
             <b>{blog.title}</b> by <b>{blog.author}</b>
           </div>
           <div>
-            &nbsp;{blog.likes} likes &nbsp; <button onClick={(e) => this.props.likeBlog(blog.id, {likes:blog.likes+1})}> like </button>
+            &nbsp;{blog.likes} likes &nbsp; <button id="likeButton" onClick={(e) => this.props.likeBlog(blog.id, {likes:blog.likes+1})}> like </button>
           </div>
           <div>
             &nbsp;<a href={blog.url}> {blog.url} </a>
