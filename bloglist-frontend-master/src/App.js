@@ -1,13 +1,12 @@
 import React from 'react'
 import './App.css'
-import Blog from './components/Blog'
 import blogService from './services/blogs'
-import Login from './components/Login'
 import loginService from './services/login'
 import BlogPage from './components/BlogPage'
 import LoginForm from './components/LoginForm'
 
 import Notification from './components/Notification' 
+
 
 class App extends React.Component {
   constructor(props) {
@@ -35,12 +34,10 @@ class App extends React.Component {
       {
         const l = JSON.parse(login);
         this.storeLogin(l);
-        console.log('_________ set token: ', l.token)
       }
       catch ( e )
       {
         // in case of error, clear local storage just in case
-        console.log('_________ CLEAR token ')
         window.localStorage.clear();
       }
     }
