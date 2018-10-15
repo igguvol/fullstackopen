@@ -4,7 +4,7 @@ import Blog from './Blog'
 
 const BlogPage = (props) => {
   return (
-    <div key='BlogPage'>
+    <div key='BlogPage' id='BlogPage'>
       <h2>blogs</h2>
       <h4 >{props.username} logged in &nbsp;
         <button key='logout' onClick={props.logout}> Logout </button>
