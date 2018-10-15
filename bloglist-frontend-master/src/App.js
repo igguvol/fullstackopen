@@ -4,7 +4,9 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import Login from './components/Login'
 import loginService from './services/login'
-import BlogForm from './components/BlogForm'
+import BlogPage from './components/BlogPage'
+import LoginForm from './components/LoginForm'
+
 import Notification from './components/Notification' 
 
 class App extends React.Component {
@@ -137,38 +139,26 @@ class App extends React.Component {
     }
   }
 
+
+
   render() {
     const token = this.state.token;
 
-    if (token && token !== '')
-      return (
-        <div>
-          <Notification message={this.state.notification} style={this.state.notificationStyle}/>
-          <h2>blogs</h2>
-          <h4 >{this.state.username} logged in &nbsp;
-            <button key='logout' onClick={this.logout}> Logout </button>
-          </h4>
-          <BlogForm submit={this.submitBlog}/>
-          <br />
-          {this.state.blogs.map(blog => 
-            <Blog key={blog.id} blog={blog}
-              username={this.state.username}
-              likeBlog={this.likeBlog} 
-              deleteBlog={this.deleteBlog}
-            />
-          )}
-        </div>
-      )
-    else
-      return (
-        <div>
-          <Notification message={this.state.notification} style={this.state.notificationStyle}/>
-          <form onSubmit={this.login}>
-            {Login(this.state,this.onLoginChange)}
-            <button key='login' onClick={this.login}> Login </button>
-          </form>
-        </div>
-      );
+    return (
+      <div>
+      <Notification message={this.state.notification} style={this.state.notificationStyle}/>
+      (token && token!=='' ?
+        <BlogPage username={this.state.username} 
+          logout={this.logout}
+          submitBlog={this.submitBlog}
+          blogs={this.state.blogs}
+          likeBlog={this.likeBlog}
+          deleteBlog={this.deleteBlog}
+          />
+        :
+        <LoginForm onSubmit={this.login} state={this.state} onLoginChange={this.onLoginChange}/>
+      </div>
+    )
   }
 }
 
